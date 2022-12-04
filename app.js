@@ -5,6 +5,7 @@ var logger = require('morgan');
 require('dotenv').config()
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var session = require('express-session')
 
 var app = express();
 const { auth } = require('express-openid-connect');
@@ -27,7 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: process.env.session_secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

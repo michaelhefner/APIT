@@ -24,16 +24,20 @@ router.get('/profile', requiresAuth(), (req, res) => {
   res.sendFile(path.join(path.dirname(__dirname), '/public/profile.html'), {user: req.oidc.user});
 });
 router.get('/add-test', requiresAuth(), (req, res) => {
-  console.log('user in add-test', req.oidc.user);
-  db.insert.test("testname", "testdescription", "testtype", "testdata", "testresult", "teststatus", req.oidc.user.nickname, "testurl")
-  res.sendFile(path.join(path.dirname(__dirname), '/public/add-test.html'), {user: req.oidc.user});
+  res.sendFile(path.join(path.dirname(__dirname), '/public/add-test.html'));
 });
-router.post('/add-test', requiresAuth(), (req, res) => {
-  db.insert.test("testname", "testdescription", "testtype", "testdata", "testresult", "teststatus", req.oidc.user.nickname, "testurl")
-  res.sendFile(path.join(path.dirname(__dirname), '/public/add-test.html'), {user: req.oidc.user});
+router.post('/add-test', (req, res) => {
+  console.log(req);
+  // db.insert.test(req.body.name, req.body.description, req.body.method, req.body.body, req.body.headers, req.body.status, req.oidc.user.nickname, req.body.url);
+  res.json(req.body);
+  // res.sendFile(path.join(path.dirname(__dirname), '/public/add-test.html'), {user: req.oidc.user});
 });
 
-router.get('/profile-info', requiresAuth(), (req, res) => {
+router.post('/test', (req, res) => {
+  console.log(req);
+  res.send("test added");
+  });
+router.post('/profile-info', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 

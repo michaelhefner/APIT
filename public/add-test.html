@@ -1,26 +1,90 @@
 <html>
+  <head>
+    <title>APITester</title>
+    <link rel="stylesheet" href="/stylesheets/form.css" />
+    <link rel="stylesheet" href="./stylesheets/form.css" />
+    <script async src="./javascripts/mh-dyno-data.js"></script>
+  </head>
 
-<head>
-  <title>APITester</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <script async src="./javascripts/mh-dyno-data.js"></script>
-</head>
-
-<body>
+  <body>
     <header>
-      <h1>  <mh name="username"/>
-      </h1>
-      <nav> 
+      <h1><mh name="username" /></h1>
+
+      <nav>
         <a href="/profile">Profile</a>
         <a href="/add-test">Add Test</a>
         <a href="/login">Login</a>
         <a href="/logout">Logout</a>
       </nav>
     </header>
-    <form>
-        <label for="name">Name</label>
-        name, description, type, data, result, status, user, url
-    </form>
-</body>
+    <div class="container">
 
+    <article class="input-row">
+      <section>
+        <label for="name">Name </label>
+        <input class="underline-input" type="text" id="name" name="name" />
+      </section>
+      <section>
+        <label for="description">Description </label>
+        <input
+          class="underline-input"
+          type="text"
+          id="description"
+          name="description"
+        />
+      </section>
+    </article>
+    <article id="action" class="input-row">
+      <section>
+        <label for="method">Method</label>
+        <select id="selected-method" list="method" name="method">
+
+        <!-- <datalist id="method">0 -->
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+        <!-- </datalist> -->
+        </select>
+      </section>
+      <section>
+        <label for="url">URL</label>
+        <input required pattern="https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$" type="text" id="url" name="url" />
+      </section>
+      <section>
+        <button id="send-test">Send Test</button>
+      </section>
+    </article>
+    <h3>Body</h3>
+
+    <article class="input-row">
+      <section>
+        <label for="key">Key</label> <input type="text" id="key" name="key" />
+      </section>
+      <section>
+        <label for="value">Value</label>
+        <input type="text" id="value" name="value" />
+      </section>
+      <section>
+        <button id="add-values">Add</button>
+      </section>
+    </article>
+    <p type="text" id="body-build" name="body"></p>
+
+    
+    <article class="input-row">
+      <section>
+    <label for="headers"
+      >Headers<input
+        type="text"
+        id="headers"
+        name="headers"
+        value="{'Content-Type': 'application/json'}"
+      />
+    </label>
+  </section>
+  </article>
+  </div>
+
+  </body>
 </html>
