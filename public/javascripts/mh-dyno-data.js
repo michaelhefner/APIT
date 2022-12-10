@@ -9,18 +9,26 @@ const bodyInput = document.querySelector("#body-build");
 const key = document.querySelector("#key");
 const value = document.querySelector("#value");
 const inputs = document.querySelectorAll("input");
+const reqHeaders = new Headers();
 
-let method = document.getElementById("selected-method").value;
-let url = document.getElementById("url").value;
-let body = document.getElementById("body-build").value;
-let headers = document.getElementById("headers").value;
-
+let testData = {
+  name: document.getElementById("name").value,
+  description: document.getElementById("description").value,
+  method: document.getElementById("selected-method").value,
+  body: document.getElementById("body-build").value,
+  headers: document.getElementById("headers").value,
+  url: document.getElementById("url").value,
+};
 
 const setFormValues = () => {
-  method = document.getElementById("selected-method").value;
-  url = document.getElementById("url").value;
-  body = document.getElementById("body-build").value;
-  headers = document.getElementById("headers").value;
+  testData = {
+    name: document.getElementById("name").value,
+    description: document.getElementById("description").value,
+    method: document.getElementById("selected-method").value,
+    body: document.getElementById("body-build").value,
+    headers: document.getElementById("headers").value,
+    url: document.getElementById("url").value,
+  };
 };
 
 const clearBodyKeyValues = () => {
@@ -30,45 +38,27 @@ const clearBodyKeyValues = () => {
 
 sendTest.addEventListener("click", (e) => {
   setFormValues();
-  const test = {
-    // name: document.getElementById('name').value,
-    // description: document.getElementById('description').value,
-    method: method,
-    body: body,
-    headers: headers,
-    url: url,
-  };
-  if (method === "GET"){
-
-    fetch(test.url)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  } else {
-    fetch(test.url, {
-      method: test.method,
-      mode: "cors",
-      headers: contentType,
-      body: JSON.stringify(output),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-
-  }
+  reqHeaders.append("Content-Type", "application/json");
+  reqHeaders.append("Access-Control-Allow-Origin", "*");
+  fetch("/send-test", {
+    method: "post",
+    headers: reqHeaders,
+    body: JSON.stringify(testData),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 });
-
 for (const input of inputs) {
-
   input.addEventListener("keyup", (e) => {
-    if(e.target.id === "url") {
+    if (e.target.id === "url") {
       if (e.target.validity.valid) {
         e.target.classList.add("input-valid");
-        if(e.target.classList.contains("input-invalid")) {
-
-        e.target.classList.remove("input-invalid");
+        if (e.target.classList.contains("input-invalid")) {
+          e.target.classList.remove("input-invalid");
         }
       } else {
         if (e.target.classList.contains("input-valid")) {
-        e.target.classList.remove("input-valid");
+          e.target.classList.remove("input-valid");
         }
         e.target.classList.add("input-invalid");
         e.target.classList.add("input-invalid");

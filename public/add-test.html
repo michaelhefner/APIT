@@ -1,6 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>APITester</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="API Tester" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/stylesheets/form.css" />
     <link rel="stylesheet" href="./stylesheets/form.css" />
     <script async src="./javascripts/mh-dyno-data.js"></script>
@@ -17,74 +21,87 @@
         <a href="/logout">Logout</a>
       </nav>
     </header>
-    <div class="container">
+    <main>
+      <h2>Add Test</h2>
+      <div class="container">
+        
+      <article class="input-row">
+        <h3>Test Info</h3>
+        <section>
+          <label for="name">Name </label>
+          <input class="underline-input" type="text" id="name" name="name" />
+        </section>
+        <section>
+          <label for="description">Description </label>
+          <input
+            class="underline-input"
+            type="text"
+            id="description"
+            name="description"
+          />
+        </section>
+        <section>
+          <button id="save" class="font-clear">Save</button>
+        </section>
+      </article>
+        <article id="action" class="input-row">
+          <h3>Action</h3>
+          <section>
+            <label for="selected-method">Method</label>
+            <select id="selected-method" name="selected-method">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+          </section>
+          <section>
+            <label for="url">URL</label>
+            <input
+              required
+              pattern="https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$"
+              type="text"
+              id="url"
+              name="url"
+            />
+          </section>
+          <section>
+            <button id="send-test" class="font-clear">Send</button>
+          </section>
+        </article>
 
-    <article class="input-row">
-      <section>
-        <label for="name">Name </label>
-        <input class="underline-input" type="text" id="name" name="name" />
-      </section>
-      <section>
-        <label for="description">Description </label>
-        <input
-          class="underline-input"
-          type="text"
-          id="description"
-          name="description"
-        />
-      </section>
-    </article>
-    <article id="action" class="input-row">
-      <section>
-        <label for="method">Method</label>
-        <select id="selected-method" list="method" name="method">
 
-        <!-- <datalist id="method">0 -->
-          <option value="GET">GET</option>
-          <option value="POST">POST</option>
-          <option value="PUT">PUT</option>
-          <option value="DELETE">DELETE</option>
-        <!-- </datalist> -->
-        </select>
-      </section>
-      <section>
-        <label for="url">URL</label>
-        <input required pattern="https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$" type="text" id="url" name="url" />
-      </section>
-      <section>
-        <button id="send-test">Send Test</button>
-      </section>
-    </article>
-    <h3>Body</h3>
+        <article class="input-row">
+          <h3>Body</h3>
+          <section>
+            <label for="key">Key</label>
+            <input type="text" id="key" name="key" />
+          </section>
+          <section>
+            <label for="value">Value</label>
+            <input type="text" id="value" name="value" />
+          </section>
+          <section>
+            <button id="add-values" class="font-clear">Add</button>
+          </section>
+        </article>
+        <p type="text" id="body-build" name="body"></p>
 
-    <article class="input-row">
-      <section>
-        <label for="key">Key</label> <input type="text" id="key" name="key" />
-      </section>
-      <section>
-        <label for="value">Value</label>
-        <input type="text" id="value" name="value" />
-      </section>
-      <section>
-        <button id="add-values">Add</button>
-      </section>
-    </article>
-    <p type="text" id="body-build" name="body"></p>
+        <article class="input-row">
+          <h3>Headers</h3>
 
-    
-    <article class="input-row">
-      <section>
-    <label for="headers"
-      >Headers<input
-        type="text"
-        id="headers"
-        name="headers"
-        value="{'Content-Type': 'application/json'}"
-      />
-    </label>
-  </section>
-  </article>
-  </div>
-
+          <section>
+            <label for="headers"
+              >Headers<input
+                type="text"
+                id="headers"
+                name="headers"
+                value="{'Content-Type': 'application/json'}"
+              />
+            </label>
+          </section>
+        </article>
+      </div>
+    </main>
   </body>
 </html>
