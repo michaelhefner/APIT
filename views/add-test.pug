@@ -19,10 +19,10 @@ block content
                 section
                     label(for='selected-method') Method
                     select#selected-method(name='selected-method')
-                    option(value='GET') GET
-                    option(value='POST') POST
-                    option(value='PUT') PUT
-                    option(value='DELETE') DELETE
+                        option(value='GET') GET
+                        option(value='POST') POST
+                        option(value='PUT') PUT
+                        option(value='DELETE') DELETE
                 section
                     label(for='url') URL
                     input#url(required='' pattern='https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$' type='text' name='url')
