@@ -22,7 +22,7 @@ router.get("/login", (req, res) => {
 router.get("/profile", requiresAuth(), (req, res) => {
   db.insert.user(req.oidc.user.nickname, req.oidc.user.email);
   res.sendFile(path.join(path.dirname(__dirname), "/public/profile.html"), {
-    user: req.oidc.user,
+    user: req.oidc,
   });
 });
 router.get("/add-test", requiresAuth(), (req, res) => {
