@@ -4,7 +4,7 @@ head
   script(async='' src='./javascripts/mh-dyno-data.js')
 header
   h1
-    #{user.email}
+    #{user.nickname}
   nav
     a(href='/profile') Profile
     a(href='/add-test') Add Test
@@ -12,9 +12,9 @@ header
     a(href='/logout') Logout
 p#name
   | Name: 
-  #{user.name}
+  #{user.given_name}
 p#email
   | Email: 
   #{user.email}
   script(type='text/javascript').
-    console.log('user: ', user);
+    console.log('user: ', #{user});
