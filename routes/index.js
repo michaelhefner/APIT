@@ -23,7 +23,6 @@ router.get("/profile", requiresAuth(), (req, res) => {
   console.log(req.oidc.user);
   db.insert.user(req.oidc.user.nickname, req.oidc.user.email);
   res.locals.user = req.oidc.user;
-  res.body.user = req.oidc.user;
   res.session.user = req.oidc.user;
   res.sendFile(path.join(path.dirname(__dirname), "/public/profile.html"), {
     user: req.oidc.user,
