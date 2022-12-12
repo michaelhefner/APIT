@@ -20,6 +20,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/profile", requiresAuth(), (req, res) => {
+  console.log(req.oidc.user);
   db.insert.user(req.oidc.user.nickname, req.oidc.user.email);
   res.sendFile(path.join(path.dirname(__dirname), "/public/profile.html"), {
     user: req.oidc,
