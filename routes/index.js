@@ -7,8 +7,7 @@ const https = require("http");
 
 router.get("/", function (req, res, next) {
   console.log(req.oidc.isAuthenticated());
-  res.send({ authenticated: req.oidc.isAuthenticated(), user: req.oidc.user });
-  // res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.render("index", { authenticated: req.oidc.isAuthenticated(), user: req.oidc.user });
 });
 
 router.get("/isauth", function (req, res, next) {
@@ -24,12 +23,9 @@ router.get("/profile", requiresAuth(), (req, res) => {
   db.insert.user(req.oidc.user.nickname, req.oidc.user.email);
   
   res.render('profile', { user: req.oidc.user });
-  // res.sendFile(path.join(path.dirname(__dirname), "/public/profile.html"), {
-  //   user: req.oidc.user,
-  // });
 });
 router.get("/add-test", requiresAuth(), (req, res) => {
-  res.sendFile(path.join(path.dirname(__dirname), "/public/add-test.html"));
+  res.render('add-test', { user: req.oidc.user });
 });
 router.post("/send-test", requiresAuth(), (req, res) => {
   console.log(req.body);
@@ -39,17 +35,13 @@ router.post("/send-test", requiresAuth(), (req, res) => {
       data += chunk;
     });
     resp.on("end", () => {
-      // console.log(data);  
       res.send({ data: data });
     });
   });
-  // res.sendFile(path.join(path.dirname(__dirname), '/public/add-test.html'));
 });
-router.post("/add-test", (req, res) => {
-  console.log(req);
-  // db.insert.test(req.body.name, req.body.description, req.body.method, req.body.body, req.body.headers, req.body.status, req.oidc.user.nickname, req.body.url);
+
+router.post("/add-test", requiresAuth(), (req, res) => {
   res.json(req.body);
-  // res.sendFile(path.join(path.dirname(__dirname), '/public/add-test.html'), {user: req.oidc.user});
 });
 
 router.post("/test", (req, res) => {

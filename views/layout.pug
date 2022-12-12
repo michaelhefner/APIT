@@ -1,7 +1,14 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    title APITester
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    script(async='' src='./javascripts/mh-dyno-data.js')
+  header
+    h1
+      | #{user.nickname}
+    nav
+      a(href='/profile') Profile
+      a(href='/add-test') Add Test
+      a(href='/login') Login
+      a(href='/logout') Logout
