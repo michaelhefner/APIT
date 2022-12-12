@@ -33,7 +33,7 @@ app.use(session({
   secret: process.env.session_secret,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: { secure: true }
 }))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
