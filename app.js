@@ -8,6 +8,11 @@ var usersRouter = require('./routes/users');
 var session = require('express-session')
 
 var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug')
+
 const { auth } = require('express-openid-connect');
 
 const config = {
@@ -28,9 +33,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug')
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: process.env.session_secret,
