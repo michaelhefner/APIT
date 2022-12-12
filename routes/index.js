@@ -25,12 +25,14 @@ router.get("/profile", requiresAuth(), (req, res) => {
   
   res.render('profile', { user: req.oidc.user });
 });
+
 router.get("/add-test", requiresAuth(), (req, res) => {
   res.render('add-test', { user: req.oidc.user });
 });
+
 router.post("/send-test", requiresAuth(), (req, res) => {
   console.log(req.body);
-  if (req.body.url.indexOf("https://") === -1) {
+  if (req.body.url.indexOf("https") === -1) {
     http.get(req.body.url, (resp) => {
       let data = "";
       resp.on("data", (chunk) => {
