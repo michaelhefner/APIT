@@ -36,9 +36,10 @@ const clearBodyKeyValues = () => {
 
 sendTest.addEventListener("click", (e) => {
   setFormValues();
-  console.log(JSON.stringify(testData));
+  console.log(JSON.stringify('test data', testData));
   reqHeaders.append("Content-Type", "application/json");
   reqHeaders.append("Access-Control-Allow-Origin", "*");
+  console.log('data sent', testData)
   fetch("/send-test", {
     method: "post",
     headers: reqHeaders,
@@ -46,8 +47,9 @@ sendTest.addEventListener("click", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      divRes.innerHTML = `${data.data}`;
-      document.querySelector("body").appendChild(divRes);
+      console.log(data)
+      // divRes.innerHTML = `${data.data}`;
+      // document.querySelector("body").appendChild(divRes);
 });
 });
 for (const input of inputs) {
