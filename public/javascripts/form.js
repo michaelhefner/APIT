@@ -46,7 +46,7 @@ sendTest.addEventListener("click", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      iframe.innerHTML = data.data;
+      iframe.innerHTML = `${data.data}`;
       document.querySelector("body").appendChild(iframe);
 });
 });
