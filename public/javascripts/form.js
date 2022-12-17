@@ -7,6 +7,7 @@ const key = document.querySelector("#key");
 const value = document.querySelector("#value");
 const inputs = document.querySelectorAll("input");
 const reqHeaders = new Headers();
+const iframe = document.createElement("iframe");
 
 let testData = {
   name: document.getElementById("name").value,
@@ -44,7 +45,10 @@ sendTest.addEventListener("click", (e) => {
     body: JSON.stringify(testData),
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      iframe.innerHTML = data.data;
+      document.querySelector("body").appendChild(iframe);
+});
 });
 for (const input of inputs) {
   input.addEventListener("keyup", (e) => {
