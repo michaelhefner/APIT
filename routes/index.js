@@ -37,7 +37,7 @@ router.post("/send-test", requiresAuth(), (req, res) => {
     http.get({host: req.body.url.slice(req.body.url.indexOf('://') + 3, req.body.url.length)}, (resp) => {
       let data = "";
       resp.on("data", (chunk) => {
-        data += chunk;
+        data += chunk.toString();
       });
       resp.on("end", () => {
         // res.render('result', { data: data });
