@@ -41,7 +41,7 @@ router.post("/send-test", requiresAuth(), (req, res) => {
       });
       resp.on("end", () => {
         // res.render('result', { data: data });
-        res.json({ data: data });
+        res.send({ data: data });
       });
     });
   } else {
