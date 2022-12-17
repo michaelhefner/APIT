@@ -31,10 +31,10 @@ router.get("/add-test", requiresAuth(), (req, res) => {
 });
 
 router.post("/send-test", requiresAuth(), (req, res) => {
-  console.log(req.body);
   if (req.body.url){
-  // if (req.body.url.indexOf("https") === -1) {
-    http.get({host: req.body.url.slice(req.body.url.indexOf('://') + 3, req.body.url.length)}, (resp) => {
+  if (req.body.url.indexOf("https") === -1) {
+    http.get(req.body.url.toLowerCase(), (resp) => {
+      // http.get({host: req.body.url.slice(req.body.url.indexOf('://') + 3, req.body.url.length)}, (resp) => {
       let data = "";
       resp.on("data", (chunk) => {
         data += chunk.toString();
@@ -45,20 +45,18 @@ router.post("/send-test", requiresAuth(), (req, res) => {
       });
     });
   } else {
-    res.json({error: 'encountered an error'})
+    https.get(req.body.url.toLowerCase(), (resp) => {
+      let data = "";
+      resp.on("data", (chunk) => {
+        data += chunk.toString();
+      });
+      resp.on("end", () => {
+        // res.render('result', { data: data });
+        res.send({ data: data });
+      });
+    });
   }
-  // } else {
-  //   https.get({host: req.body.url}, (resp) => {
-  //     let data = "";
-  //     resp.on("data", (chunk) => {
-  //       data += chunk;
-  //     });
-  //     resp.on("end", () => {
-  //       // res.render('result', { data: data });
-  //       res.json({ data: data });
-  //     });
-  //   });
-  // }
+}
 });
 
 router.post("/add-test", requiresAuth(), (req, res) => {

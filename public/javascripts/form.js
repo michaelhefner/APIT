@@ -7,9 +7,11 @@ const key = document.querySelector("#key");
 const value = document.querySelector("#value");
 const inputs = document.querySelectorAll("input");
 const reqHeaders = new Headers();
+reqHeaders.append("Content-Type", "application/json");
+reqHeaders.append("Access-Control-Allow-Origin", "*");
 const divRes = document.createElement("div");
 
-let testData = {
+const testData = {
   name: document.getElementById("name").value,
   description: document.getElementById("description").value,
   method: document.getElementById("selected-method").value,
@@ -19,14 +21,12 @@ let testData = {
 };
 
 const setFormValues = () => {
-  testData = {
-    name: document.getElementById("name").value,
-    description: document.getElementById("description").value,
-    method: document.getElementById("selected-method").value,
-    body: document.getElementById("body-build").value,
-    headers: document.getElementById("headers").value,
-    url: document.getElementById("url").value,
-  };
+  testData.name = document.getElementById("name").value;
+  testData.description = document.getElementById("description").value;
+  testData.method = document.getElementById("selected-method").value;
+  testData.body = document.getElementById("body-build").value;
+  testData.headers = document.getElementById("headers").value;
+  testData.url = document.getElementById("url").value;
 };
 
 const clearBodyKeyValues = () => {
@@ -35,9 +35,7 @@ const clearBodyKeyValues = () => {
 };
 
 sendTest.addEventListener("click", (e) => {
-  setFormValues();
-  reqHeaders.append("Content-Type", "application/json");
-  reqHeaders.append("Access-Control-Allow-Origin", "*");
+  // setFormValues();
   console.log('data sent', testData)
   fetch("/send-test", {
     method: "post",
@@ -52,6 +50,9 @@ sendTest.addEventListener("click", (e) => {
 });
 });
 for (const input of inputs) {
+  input.addEventListener("change", (e) => {
+    setFormValues();
+  });
   input.addEventListener("keyup", (e) => {
     if (e.target.id === "url") {
       if (e.target.validity.valid) {
@@ -59,6 +60,8 @@ for (const input of inputs) {
         if (e.target.classList.contains("input-invalid")) {
           e.target.classList.remove("input-invalid");
         }
+        testData.url = e.target.value;
+        console.log(testData.url);
       } else {
         if (e.target.classList.contains("input-valid")) {
           e.target.classList.remove("input-valid");
@@ -74,5 +77,5 @@ addKeyValue.addEventListener("click", (e) => {
   console.log("add key value");
   output[key.value] = value.value;
   bodyInput.innerHTML = JSON.stringify(output);
-  clearBodyKeyValues();
+  // clearBodyKeyValues();
 });
