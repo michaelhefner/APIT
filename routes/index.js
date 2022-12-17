@@ -59,11 +59,7 @@ router.post("/add-test", requiresAuth(), (req, res) => {
   res.json(req.body);
 });
 
-router.post("/test", (req, res) => {
-  console.log(req);
-  res.send("test added");
-});
-router.post("/profile-info", requiresAuth(), (req, res) => {
+router.get("/profile-info", requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 
