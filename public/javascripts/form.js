@@ -36,7 +36,6 @@ const clearBodyKeyValues = () => {
 
 sendTest.addEventListener("click", (e) => {
   setFormValues();
-  console.log(JSON.stringify('test data', testData));
   reqHeaders.append("Content-Type", "application/json");
   reqHeaders.append("Access-Control-Allow-Origin", "*");
   console.log('data sent', testData)

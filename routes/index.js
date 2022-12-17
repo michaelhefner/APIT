@@ -32,6 +32,7 @@ router.get("/add-test", requiresAuth(), (req, res) => {
 
 router.post("/send-test", requiresAuth(), (req, res) => {
   console.log(req.body);
+  if (req.body.url){
   // if (req.body.url.indexOf("https") === -1) {
     http.get({host: req.body.url.slice(req.body.url.indexOf('://') + 3, req.body.url.length)}, (resp) => {
       let data = "";
@@ -43,6 +44,9 @@ router.post("/send-test", requiresAuth(), (req, res) => {
         res.json({ data: data });
       });
     });
+  } else {
+    res.json({error: 'encountered an error'})
+  }
   // } else {
   //   https.get({host: req.body.url}, (resp) => {
   //     let data = "";
