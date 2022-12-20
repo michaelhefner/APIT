@@ -20,16 +20,6 @@ block content
                 section
                     button#send-test.font-clear Send
             article.input-row
-                h3 Test Info
-                section
-                    label(for='name') Name 
-                    input#name.underline-input(required='' type='text' name='name')
-                section
-                    label(for='description') Description 
-                    input#description.underline-input(required='' type='text' name='description')
-                section
-                    button#save.font-clear Save
-            article.input-row
                 h3 Body
                 section
                     label(for='key') Key
@@ -45,4 +35,15 @@ block content
                     label(for='headers')
                     | Headers
                     input#headers(required='' type='text' name='headers' value="{'Content-Type': 'application/json'}")
+                    
+            article.input-row
+                h3 Test Info
+                section
+                    label(for='name') Name 
+                    input#name.underline-input(required='' type='text' name='name')
+                section
+                    label(for='description') Description 
+                    input#description.underline-input(required='' type='text' name='description')
+                section
+                    button#save.font-clear Save
             p#body-build(type='text' name='body')
