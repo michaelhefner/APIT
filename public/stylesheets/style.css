@@ -1,21 +1,133 @@
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #eee;
-  background: rgba(51, 51, 51, 1);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+* {
+    font-family: 'Roboto', sans-serif;
+}
+body main .container {
+  width: 50vw;
 }
 
-a {
-  color: #00B7FF;
-}
-
-.body-container-row {
+body main .input-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
+  border-top: solid 1px #eee;
+  border-bottom: solid 1px #eee;
+  margin: 1rem 0;
+  padding: 1rem;
+  min-width: 100%;
+  align-items: flex-end;
 }
 
-.body-container-row label:nth-of-type(1) {
-  width: 95%;
-  margin-right: 4%;
+body main .input-row :first-child {
+  width: 100%
+}
+
+body main .input-row section {
+  display: flex;
+  flex-direction: column;
+  flex:1;
+}
+
+body main .input-row section:nth-child(3) {
+  flex: 2;
+}
+body main .input-row section:last-child {
+  flex:none;
+}
+
+
+body main .input-row section label {
+  /* z-index: 1; */
+  padding-left: .5rem;
+}
+
+body main #action section:nth-of-type(1) label {
+  z-index: -1;
+  color: transparent;
+}
+
+
+body main .input-row section input,
+body main .input-row section select {
+  padding: .5rem 1rem;
+  line-height: 1;
+  margin-top: -25px;
+  transition: margin .5s;
+  border: solid 1px #ddd;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* body main .input-row section input:valid, */
+/* body main .input-row section select:valid, */
+body main .input-row section input:-internal-autofill-selected {
+  -webkit-background-clip: text;
+  background-color: rgba(0, 255, 55, 0.349) !important;
+}
+
+body main .input-row section input:focus,
+body main .input-row section select:focus {
+  margin: 0;
+}
+body main .input-row section input.input-invalid,
+body main .input-row section select.input-invalid {
+  border: solid 1px red;
+  background: rgb(255, 137, 137);
+}
+
+body main .input-row section input.input-valid,
+body main .input-row section select.input-valid {
+  border: solid 1px green;
+  background: rgb(196, 255, 196);
+}
+
+
+/* body main .input-row section button {
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  margin: 0 1rem;
+}
+
+
+body main .input-row section button#send-test {
+  background: #00B7FF;
+  color: white;
 } */
+
+
+button {
+  margin-top: auto;
+  font-size: 1.25rem;
+  font-weight: bold;
+  width: auto;
+  padding: .6rem .2rem .2rem 1.5rem;
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  margin-left: 1rem;
+  transition: all .2s ease-in-out;
+  min-width: 75px;
+}
+button:hover {
+  background-color: #8a2be2cc;
+  color: #333;
+  cursor: pointer;
+}
+button#save {
+  background: url('/images/save.png') no-repeat;
+}
+button#send-test {
+  background: url('/images/send.png') no-repeat;
+}
+
+button#add-values {
+  background: url('/images/add.png') no-repeat;
+}
+
+button#send-test:focus {
+  background: url('/images/sent.png') no-repeat;
+}

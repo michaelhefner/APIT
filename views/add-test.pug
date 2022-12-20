@@ -5,16 +5,6 @@ block content
     main
         h2 Add Test
         .container
-            article.input-row
-                h3 Test Info
-                section
-                    label(for='name') Name 
-                    input#name.underline-input(type='text' name='name')
-                section
-                    label(for='description') Description 
-                    input#description.underline-input(type='text' name='description')
-                section
-                    button#save.font-clear Save
             article#action.input-row
                 h3 Action
                 section
@@ -26,23 +16,33 @@ block content
                         option(value='DELETE') DELETE
                 section
                     label(for='url') URL
-                    input#url(required='' pattern='https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$' type='text' name='url')
+                    input#url(required='' pattern='.*[\.].*' type='url' name='url')
                 section
                     button#send-test.font-clear Send
+            article.input-row
+                h3 Test Info
+                section
+                    label(for='name') Name 
+                    input#name.underline-input(required='' type='text' name='name')
+                section
+                    label(for='description') Description 
+                    input#description.underline-input(required='' type='text' name='description')
+                section
+                    button#save.font-clear Save
             article.input-row
                 h3 Body
                 section
                     label(for='key') Key
-                    input#key(type='text' name='key')
+                    input#key(required='' type='text' name='key')
                 section
                     label(for='value') Value
-                    input#value(type='text' name='value')
+                    input#value(required='' type='text' name='value')
                 section
                     button#add-values.font-clear Add
-                p#body-build(type='text' name='body')
             article.input-row
                 h3 Headers
                 section
                     label(for='headers')
                     | Headers
-                    input#headers(type='text' name='headers' value="{'Content-Type': 'application/json'}")
+                    input#headers(required='' type='text' name='headers' value="{'Content-Type': 'application/json'}")
+            p#body-build(type='text' name='body')

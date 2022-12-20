@@ -8,7 +8,10 @@ const http = require("http");
 
 router.get("/", function (req, res, next) {
   console.log(req.oidc.isAuthenticated());
-  res.render("index", { authenticated: req.oidc.isAuthenticated(), user: req.oidc.user });
+  res.render("index", {
+    authenticated: req.oidc.isAuthenticated(),
+    user: req.oidc.user,
+  });
 });
 
 router.get("/isauth", function (req, res, next) {
@@ -22,44 +25,42 @@ router.get("/login", (req, res) => {
 router.get("/profile", requiresAuth(), (req, res) => {
   console.log(req.oidc.user);
   db.insert.user(req.oidc.user.nickname, req.oidc.user.email);
-  
-  res.render('profile', { user: req.oidc.user });
+
+  res.render("profile", { user: req.oidc.user });
 });
 
 router.get("/add-test", requiresAuth(), (req, res) => {
-  res.render('add-test', { user: req.oidc.user });
+  res.render("add-test", { user: req.oidc.user });
 });
 
 router.post("/send-test", requiresAuth(), (req, res) => {
-  console.log(req.body.url, req.body.url.toLowerCase().indexOf("https"))
-  if (req.body.url){
-  if (req.body.url.toLowerCase().indexOf("https") === -1) {
-    console.log('http');
-    http.get(req.body.url.toLowerCase(), (resp) => {
-      // http.get({host: req.body.url.slice(req.body.url.indexOf('://') + 3, req.body.url.length)}, (resp) => {
-      let data = "";
-      resp.on("data", (chunk) => {
-        data += chunk.toString();
+  console.log(req.body.url, req.body.url.toLowerCase().indexOf("https"));
+  if (req.body.url) {
+    if (req.body.url.toLowerCase().indexOf("https") === -1) {
+      console.log("http");
+      http.get(req.body.url.toLowerCase(), (resp) => {
+        let data = "";
+        resp.on("data", (chunk) => {
+          data += chunk.toString();
+        });
+        resp.on("end", () => {
+          res.send({ data: data });
+        });
       });
-      resp.on("end", () => {
-        // res.render('result', { data: data });
-        res.send({ data: data });
+    } else {
+      console.log("https");
+      https.get(req.body.url.toLowerCase(), (resp) => {
+        let data = "";
+        resp.on("data", (chunk) => {
+          data += chunk.toString();
+        });
+        resp.on("end", () => {
+          // res.render('result', { data: data });
+          res.send({ data: data });
+        });
       });
-    });
-  } else {
-    console.log('https');
-    https.get(req.body.url.toLowerCase(), (resp) => {
-      let data = "";
-      resp.on("data", (chunk) => {
-        data += chunk.toString();
-      });
-      resp.on("end", () => {
-        // res.render('result', { data: data });
-        res.send({ data: data });
-      });
-    });
+    }
   }
-}
 });
 
 router.post("/add-test", requiresAuth(), (req, res) => {
