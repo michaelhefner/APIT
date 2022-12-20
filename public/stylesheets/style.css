@@ -131,3 +131,24 @@ button#add-values {
 button#send-test:focus {
   background: url('/images/sent.png') no-repeat;
 }
+
+code {
+  background-color: #222;
+  color: #fff;
+  padding: .2rem 1.5rem;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  display: block;
+  width: 80vw;
+  white-space: break-spaces;
+}
+code[text="function"] {
+  background-color: #00B7FF;
+  color: #fff;
+  padding: .2rem 1.5rem;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  display: block;
+  width: 80vw;
+  white-space: break-spaces;
+}

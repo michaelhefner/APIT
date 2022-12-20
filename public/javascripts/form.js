@@ -1,4 +1,3 @@
-
 const contentType = { "Content-Type": "application/json" };
 const output = {};
 const sendTest = document.getElementById("send-test");
@@ -9,7 +8,8 @@ const inputs = document.querySelectorAll("input");
 const reqHeaders = new Headers();
 reqHeaders.append("Content-Type", "application/json");
 reqHeaders.append("Access-Control-Allow-Origin", "*");
-const divRes = document.createElement("pre");
+const preRes = document.createElement("pre");
+const codeRes = document.createElement("code");
 
 const testData = {
   name: document.getElementById("name").value,
@@ -36,7 +36,7 @@ const clearBodyKeyValues = () => {
 
 sendTest.addEventListener("click", (e) => {
   // setFormValues();
-  console.log('data sent', testData)
+  console.log("data sent", testData);
   fetch("/send-test", {
     method: "post",
     headers: reqHeaders,
@@ -44,18 +44,40 @@ sendTest.addEventListener("click", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data)
+      console.log(data);
+      const htmlResults = data.data.matchAll(/>/g);
+      const jsResults = data.data.matchAll(/{/g);
+        let resOutput = "";
+      
+      const replace = (matches, input) => {
+        let prevIndex = 0;
+        let output = "";
+        for (const match of matches) {
+          console.log(match.index);
+          if (output === "") {
+            output = input.slice(0, match.index + 1) + "\n\t";
+          } else {
+            output =
+              output + input.slice(prevIndex + 1, match.index + 1) + "\n\t";
+          }
+          prevIndex = match.index;
+        }
+        return output;
+      };
+      resOutput = replace(htmlResults, data.data);
+      resOutput = replace(jsResults, resOutput);
+      console.log(resOutput)
+      codeRes.innerText = `${data.data}`;
 
-      divRes.innerHTML = `${data.data}`;
-      document.querySelector("body").appendChild(divRes);
-});
+      preRes.appendChild(codeRes);
+      document.querySelector("body").appendChild(preRes);
+    });
 });
 for (const input of inputs) {
   input.addEventListener("change", (e) => {
     setFormValues();
   });
   input.addEventListener("keyup", (e) => {
-
     if (e.target.id === "url") {
       if (e.target.validity.valid) {
         e.target.classList.add("input-valid");
@@ -70,7 +92,7 @@ for (const input of inputs) {
         e.target.classList.add("input-invalid");
         e.target.classList.add("input-invalid");
       }
-      if (e.key === 'Enter') {
+      if (e.key === "Enter") {
         sendTest.click();
       }
     }

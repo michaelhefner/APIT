@@ -5,6 +5,7 @@ const { requiresAuth } = require("express-openid-connect");
 var path = require("path");
 const https = require("https");
 const http = require("http");
+const pretty = require('pretty');
 
 router.get("/", function (req, res, next) {
   console.log(req.oidc.isAuthenticated());
@@ -44,7 +45,7 @@ router.post("/send-test", requiresAuth(), (req, res) => {
           data += chunk.toString();
         });
         resp.on("end", () => {
-          res.send({ data: data });
+          res.send({ data: `${pretty(data.toString())}` });
         });
       });
     } else {
@@ -56,7 +57,7 @@ router.post("/send-test", requiresAuth(), (req, res) => {
         });
         resp.on("end", () => {
           // res.render('result', { data: data });
-          res.send({ data: data });
+          res.send({ data: `${pretty(data.toString())}` });
         });
       });
     }
