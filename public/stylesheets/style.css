@@ -3,23 +3,31 @@
     font-family: 'Roboto', sans-serif;
 }
 body main .container {
-  width: 50vw;
-}
-
-body main .input-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
   border-top: solid 1px #eee;
   border-bottom: solid 1px #eee;
-  margin: 1rem 0;
-  padding: 1rem;
   min-width: 100%;
-  align-items: flex-end;
 }
 
-body main .input-row :first-child {
+body main .input-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-top: solid 1px #eee;
+  border-bottom: solid 1px #eee;
+  /* margin: 1rem; */
+  /* padding: 1rem; */
+  width: 50%;
+  align-items: flex-end;
+  background-color: #00000005;
+  
+}
+
+body main .input-row :first-child,
+body main .input-row#action {
   width: 100%
 }
 
@@ -30,45 +38,37 @@ body main .input-row section {
 }
 
 body main .input-row section:nth-child(3) {
-  flex: 2;
+  /* flex: 2; */
 }
 body main .input-row section:last-child {
   flex:none;
+  margin: auto;
 }
 
 
 body main .input-row section label {
-  /* z-index: 1; */
-  padding-left: .5rem;
+  z-index: 1;
+  margin: 1rem 0 0 5px;
+  color: #0009;
+  font-weight: bold;
 }
-
-body main #action section:nth-of-type(1) label {
-  z-index: -1;
-  color: transparent;
-}
-
 
 body main .input-row section input,
 body main .input-row section select {
-  padding: .5rem 1rem;
-  line-height: 1;
-  margin-top: -25px;
-  transition: margin .5s;
-  border: solid 1px #ddd;
-  box-shadow: none;
-  background: transparent;
-}
-
-/* body main .input-row section input:valid, */
-/* body main .input-row section select:valid, */
-body main .input-row section input:-internal-autofill-selected {
-  -webkit-background-clip: text;
-  background-color: rgba(0, 255, 55, 0.349) !important;
+  margin-top: -1.25rem;
+  margin-bottom: 1rem;
+  min-height: 17px;
+  background: white;
+  border: solid 1px #fff4;
+  padding: 1.5rem 1rem .25rem;
+  transition: all 500ms ease-in-out;
+  
 }
 
 body main .input-row section input:focus,
 body main .input-row section select:focus {
-  margin: 0;
+  margin-top: 0;
+  padding: .25rem;
 }
 body main .input-row section input.input-invalid,
 body main .input-row section select.input-invalid {
@@ -79,36 +79,18 @@ body main .input-row section select.input-invalid {
 body main .input-row section input.input-valid,
 body main .input-row section select.input-valid {
   border: solid 1px green;
-  background: rgb(196, 255, 196);
 }
-
-
-/* body main .input-row section button {
-  border: none;
-  font-weight: bold;
-  border-radius: 5px;
-  padding: .5rem 1rem;
-  margin: 0 1rem;
-}
-
-
-body main .input-row section button#send-test {
-  background: #00B7FF;
-  color: white;
-} */
-
 
 button {
-  margin-top: auto;
+  margin: auto 1rem;
   font-size: 1.25rem;
   font-weight: bold;
   width: auto;
-  padding: .6rem .2rem .2rem 1.5rem;
+  /* padding: .6rem .2rem .2rem 1.5rem; */
   background-color: blueviolet;
-  color: white;
+  color: transparent;
   border: none;
   border-radius: 3px;
-  margin-left: 1rem;
   transition: all .2s ease-in-out;
   min-width: 75px;
 }
@@ -133,22 +115,67 @@ button#send-test:focus {
 }
 
 code {
-  background-color: #222;
-  color: #fff;
-  padding: .2rem 1.5rem;
+  background-color: #2222;
   border-radius: 3px;
   font-size: 1.2rem;
+  max-width: 100%;
   display: block;
-  width: 80vw;
+  font-family: monospace;
   white-space: break-spaces;
+  overflow-wrap: break-word;
 }
 code[text="function"] {
   background-color: #00B7FF;
   color: #fff;
-  padding: .2rem 1.5rem;
   border-radius: 3px;
   font-size: 1.2rem;
   display: block;
-  width: 80vw;
   white-space: break-spaces;
+}
+
+.container .col-8 {
+  width: calc((8/12) * 100%);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container .col-4 {
+  width: calc((4/12) * 100%);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.display-body {
+  background-color: #00000005;
+  min-width: 100%;
+  min-height: 100px;
+  max-height: 500px;
+  max-width: 100%;
+  white-space: break-spaces;
+  overflow-y: visible;
+  /* margin: 1rem; */
+  overflow-y: visible;
+  /* padding: 1rem; */
+  display: flex;
+}
+.int-border {
+  margin: 2.5%;
+  border: solid 1px #fff4;
+  min-height: 100%;
+  /* min-width: 90%; */
+  /* padding: 2.5%; */
+}
+.int-border,
+.display-body {
+  border-radius: 4px;
+
+}
+.display-body p {
+  letter-spacing: 5px;
+
+}
+.full-width {
+  width: 100%;
 }

@@ -16,7 +16,7 @@ const testData = {
   description: document.getElementById("description").value,
   method: document.getElementById("selected-method").value,
   body: document.getElementById("body-build").value,
-  headers: document.getElementById("headers").value,
+  // headers: document.getElementById("headers").value,
   url: document.getElementById("url").value,
 };
 
@@ -25,7 +25,7 @@ const setFormValues = () => {
   testData.description = document.getElementById("description").value;
   testData.method = document.getElementById("selected-method").value;
   testData.body = document.getElementById("body-build").value;
-  testData.headers = document.getElementById("headers").value;
+  // testData.headers = document.getElementById("headers").value;
   testData.url = document.getElementById("url").value;
 };
 
@@ -45,28 +45,28 @@ sendTest.addEventListener("click", (e) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      const htmlResults = data.data.matchAll(/>/g);
-      const jsResults = data.data.matchAll(/{/g);
-        let resOutput = "";
+      // const htmlResults = data.data.matchAll(/>/g);
+      // const jsResults = data.data.matchAll(/{/g);
+      //   let resOutput = "";
       
-      const replace = (matches, input) => {
-        let prevIndex = 0;
-        let output = "";
-        for (const match of matches) {
-          console.log(match.index);
-          if (output === "") {
-            output = input.slice(0, match.index + 1) + "\n\t";
-          } else {
-            output =
-              output + input.slice(prevIndex + 1, match.index + 1) + "\n\t";
-          }
-          prevIndex = match.index;
-        }
-        return output;
-      };
-      resOutput = replace(htmlResults, data.data);
-      resOutput = replace(jsResults, resOutput);
-      console.log(resOutput)
+      // const replace = (matches, input) => {
+      //   let prevIndex = 0;
+      //   let output = "";
+      //   for (const match of matches) {
+      //     console.log(match.index);
+      //     if (output === "") {
+      //       output = input.slice(0, match.index + 1) + "\n\t";
+      //     } else {
+      //       output =
+      //         output + input.slice(prevIndex + 1, match.index + 1) + "\n\t";
+      //     }
+      //     prevIndex = match.index;
+      //   }
+      //   return output;
+      // };
+      // resOutput = replace(htmlResults, data.data);
+      // resOutput = replace(jsResults, resOutput);
+      // console.log(resOutput)
       codeRes.innerText = `${data.data}`;
 
       preRes.appendChild(codeRes);
@@ -102,6 +102,6 @@ const addKeyValue = document.querySelector("#add-values");
 addKeyValue.addEventListener("click", (e) => {
   console.log("add key value");
   output[key.value] = value.value;
-  bodyInput.innerHTML = JSON.stringify(output);
+  bodyInput.innerHTML = (JSON.stringify(output).replace(/,/g, ",\n\t")).replace(/{/g, "{\n\t").replace(/}/g, "\n}").replace(/:/g, ": ");
   // clearBodyKeyValues();
 });

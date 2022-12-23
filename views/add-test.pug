@@ -3,47 +3,57 @@ extends layout
 block content
     script(async='' src='./javascripts/form.js')
     main
-        h2 Add Test
         .container
-            article#action.input-row
-                h3 Action
-                section
-                    label(for='selected-method') Method
-                    select#selected-method(name='selected-method')
-                        option(value='GET') GET
-                        option(value='POST') POST
-                        option(value='PUT') PUT
-                        option(value='DELETE') DELETE
-                section
-                    label(for='url') URL
-                    input#url(required='' pattern='.*[\.].*' type='url' name='url')
-                section
-                    button#send-test.font-clear Send
-            article.input-row
-                h3 Body
-                section
-                    label(for='key') Key
-                    input#key(required='' type='text' name='key')
-                section
-                    label(for='value') Value
-                    input#value(required='' type='text' name='value')
-                section
-                    button#add-values.font-clear Add
-            article.input-row
-                h3 Headers
-                section
-                    label(for='headers')
-                    | Headers
-                    input#headers(required='' type='text' name='headers' value="{'Content-Type': 'application/json'}")
-                    
-            article.input-row
-                h3 Test Info
-                section
-                    label(for='name') Name 
-                    input#name.underline-input(required='' type='text' name='name')
-                section
-                    label(for='description') Description 
-                    input#description.underline-input(required='' type='text' name='description')
-                section
-                    button#save.font-clear Save
-            p#body-build(type='text' name='body')
+            h2.full-width Add Test
+
+            .col-8
+                article#action.input-row
+                    h3 Action
+                    section
+                        label(for='selected-method') Method
+                        select#selected-method(name='selected-method')
+                            option(value='GET') GET
+                            option(value='POST') POST
+                            option(value='PUT') PUT
+                            option(value='DELETE') DELETE
+                    section
+                        label(for='url') URL
+                        input#url(required='' pattern='.*[\.].*' type='url' name='url')
+                    section
+                        button#send-test.font-clear Send
+                article.input-row
+                    h3 Request Body
+                    section
+                        label(for='key') Key
+                        input#key(required='' type='text' name='key')
+                    section
+                        label(for='value') Value
+                        input#value(required='' type='text' name='value')
+                    section
+                        button#add-values.font-clear Add
+                article.input-row
+                    h3 Headers
+                    section
+                        label(for='header-key') Key
+                        input#header-key(required='' type='text' name='header-key')
+                    section
+                        label(for='header-value') Value
+                        input#header-value(required='' type='text' name='header-value')
+                    section
+                        button#add-values.font-clear Add
+                        
+                article.input-row
+                    h3 Test Info
+                    section
+                        label(for='name') Name 
+                        input#name.underline-input(required='' type='text' name='name')
+                    section
+                        label(for='description') Description 
+                        input#description.underline-input(required='' type='text' name='description')
+                    section
+                        button#save.font-clear Save
+            .col-4
+                .display-body
+                    .int-border
+                        h4 Request Body Output
+                        pre#body-build
