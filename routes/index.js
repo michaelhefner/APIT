@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.get("/isauth", function (req, res, next) {
+router.get("/isauth", requiresAuth(),function (req, res, next) {
   res.send({ authenticated: req.oidc.isAuthenticated(), user: req.oidc.user });
 });
 
