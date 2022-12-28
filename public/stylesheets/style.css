@@ -2,6 +2,9 @@
 * {
     font-family: 'Roboto', sans-serif;
 }
+body {
+  margin: 0;
+}
 body main .container {
   display: flex;
   flex-direction: row;
@@ -10,7 +13,7 @@ body main .container {
   border-top: solid 1px #eee;
   border-bottom: solid 1px #eee;
   min-width: 100%;
-}
+} 
 
 body main .input-row {
   display: flex;
@@ -18,17 +21,15 @@ body main .input-row {
   flex-wrap: wrap;
   border-top: solid 1px #eee;
   border-bottom: solid 1px #eee;
-  /* margin: 1rem; */
-  /* padding: 1rem; */
-  width: 50%;
+  padding: .5rem;
+  width: 100%;
   align-items: flex-end;
   background-color: #00000005;
-  
 }
 
 body main .input-row :first-child,
 body main .input-row#action {
-  width: 100%
+  width: 100%;
 }
 
 body main .input-row section {
@@ -41,7 +42,7 @@ body main .input-row section:nth-child(3) {
   /* flex: 2; */
 }
 body main .input-row section:last-child {
-  flex:none;
+  flex: 2;
   margin: auto;
 }
 
@@ -59,7 +60,7 @@ body main .input-row section select {
   margin-bottom: 1rem;
   min-height: 17px;
   background: white;
-  border: solid 1px #fff4;
+  border: solid 1px #0004;
   padding: 1.5rem 1rem .25rem;
   transition: all 500ms ease-in-out;
   
@@ -92,7 +93,8 @@ button {
   border: none;
   border-radius: 3px;
   transition: all .2s ease-in-out;
-  min-width: 75px;
+  background-position: center;
+  padding: .5rem 1rem;
 }
 button:hover {
   background-color: #8a2be2cc;
@@ -139,6 +141,14 @@ code[text="function"] {
   flex-direction: row;
   flex-wrap: wrap;
 }
+.container .col-12 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.container .no-wrap {
+  flex-wrap: nowrap;
+}
 
 .container .col-4 {
   width: calc((4/12) * 100%);
@@ -178,4 +188,25 @@ code[text="function"] {
 }
 .full-width {
   width: 100%;
+}
+.light-border {
+  border: solid 1px #eee;
+  margin: -1px;
+}
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  background-color: #00000015;
+}
+.toolbar .col-8 {
+  padding: 1rem;
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  justify-content: flex-end;
+  background-color: #00000015;
+
 }

@@ -101,7 +101,9 @@ for (const input of inputs) {
 const addKeyValue = document.querySelector("#add-values");
 addKeyValue.addEventListener("click", (e) => {
   console.log("add key value");
-  output[key.value] = value.value;
+  const selectedRequest = document.querySelector('#selected-request');
+  console.log(output[selectedRequest.value])
+  // output[selectedRequest.value] ? output[selectedRequest.value] = {} : output[selectedRequest.value][key.value] = value.value;
   bodyInput.innerHTML = (JSON.stringify(output).replace(/,/g, ",\n\t")).replace(/{/g, "{\n\t").replace(/}/g, "\n}").replace(/:/g, ": ");
   // clearBodyKeyValues();
 });

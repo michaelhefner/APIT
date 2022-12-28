@@ -4,11 +4,13 @@ block content
     script(async='' src='./javascripts/form.js')
     main
         .container
-            h2.full-width Add Test
-
-            .col-8
+            .toolbar
+                .col-8
+                    button#send-test.font-clear Send
+                    button#save.font-clear Save
+            .col-8.light-border
                 article#action.input-row
-                    h3 Action
+                    //- h3 Action
                     section
                         label(for='selected-method') Method
                         select#selected-method(name='selected-method')
@@ -19,10 +21,14 @@ block content
                     section
                         label(for='url') URL
                         input#url(required='' pattern='.*[\.].*' type='url' name='url')
-                    section
-                        button#send-test.font-clear Send
                 article.input-row
-                    h3 Request Body
+                    //- h3 Request
+                    section
+                        label(for='selected-request') Method
+                        select#selected-request(name='selected-request')
+                            option(value='header') Header
+                            option(value='body') Body
+                            option(value='params') Params
                     section
                         label(for='key') Key
                         input#key(required='' type='text' name='key')
@@ -31,29 +37,29 @@ block content
                         input#value(required='' type='text' name='value')
                     section
                         button#add-values.font-clear Add
-                article.input-row
-                    h3 Headers
-                    section
-                        label(for='header-key') Key
-                        input#header-key(required='' type='text' name='header-key')
-                    section
-                        label(for='header-value') Value
-                        input#header-value(required='' type='text' name='header-value')
-                    section
-                        button#add-values.font-clear Add
+
+                //- article.input-row
+                //-     h3 Headers
+                //-     section
+                //-         label(for='header-key') Key
+                //-         input#header-key(required='' type='text' name='header-key')
+                //-     section
+                //-         label(for='header-value') Value
+                //-         input#header-value(required='' type='text' name='header-value')
+                //-     section
+                //-         button#add-values.font-clear Add
                         
                 article.input-row
-                    h3 Test Info
+                    //- h3 Test Info
                     section
                         label(for='name') Name 
                         input#name.underline-input(required='' type='text' name='name')
                     section
                         label(for='description') Description 
                         input#description.underline-input(required='' type='text' name='description')
-                    section
-                        button#save.font-clear Save
+                    //- section
             .col-4
                 .display-body
                     .int-border
-                        h4 Request Body Output
+                        //- p Request Body Output
                         pre#body-build
