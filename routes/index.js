@@ -34,6 +34,11 @@ router.get("/profile", requiresAuth(), (req, res) => {
 router.get("/add-test", requiresAuth(), (req, res) => {
   res.render("add-test", { user: req.oidc.user });
 });
+router.post("/add-test", requiresAuth(), (req, res) => {
+  db.insert.test(req.body.name, req.body.description, req.body.method, req.body.body, req.body.headers, "", req.oidc.user, req.body.url);
+  res.json(req.body);
+});
+
 
 router.post("/send-test", requiresAuth(), (req, res) => {
   console.log(req.body.url, req.body.url.toLowerCase().indexOf("https"));
@@ -63,10 +68,6 @@ router.post("/send-test", requiresAuth(), (req, res) => {
       });
     }
   }
-});
-
-router.post("/add-test", requiresAuth(), (req, res) => {
-  res.json(req.body);
 });
 
 router.get("/profile-info", requiresAuth(), (req, res) => {

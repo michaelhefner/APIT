@@ -45,32 +45,11 @@ sendTest.addEventListener("click", (e) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      // const htmlResults = data.data.matchAll(/>/g);
-      // const jsResults = data.data.matchAll(/{/g);
-      //   let resOutput = "";
       
-      // const replace = (matches, input) => {
-      //   let prevIndex = 0;
-      //   let output = "";
-      //   for (const match of matches) {
-      //     console.log(match.index);
-      //     if (output === "") {
-      //       output = input.slice(0, match.index + 1) + "\n\t";
-      //     } else {
-      //       output =
-      //         output + input.slice(prevIndex + 1, match.index + 1) + "\n\t";
-      //     }
-      //     prevIndex = match.index;
-      //   }
-      //   return output;
-      // };
-      // resOutput = replace(htmlResults, data.data);
-      // resOutput = replace(jsResults, resOutput);
-      // console.log(resOutput)
       codeRes.innerText = `${data.data}`;
 
       preRes.appendChild(codeRes);
-      document.querySelector("body").appendChild(preRes);
+      document.querySelector(".display-body").appendChild(preRes);
     });
 });
 for (const input of inputs) {
@@ -102,8 +81,12 @@ const addKeyValue = document.querySelector("#add-values");
 addKeyValue.addEventListener("click", (e) => {
   console.log("add key value");
   const selectedRequest = document.querySelector('#selected-request');
-  console.log(output[selectedRequest.value])
-  // output[selectedRequest.value] ? output[selectedRequest.value] = {} : output[selectedRequest.value][key.value] = value.value;
+  if(output[`${selectedRequest.value}`]) {
+    output[`${selectedRequest.value}`][`${key.value}`] = value.value;
+  } else {
+    output[`${selectedRequest.value}`] = {};
+    output[`${selectedRequest.value}`][`${key.value}`] = value.value;
+  }
   bodyInput.innerHTML = (JSON.stringify(output).replace(/,/g, ",\n\t")).replace(/{/g, "{\n\t").replace(/}/g, "\n}").replace(/:/g, ": ");
-  // clearBodyKeyValues();
+  clearBodyKeyValues();
 });
